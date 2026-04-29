@@ -4,7 +4,7 @@ services:
   agenda:
     build: .
     ports:
-      - "3000:3000"
+      - "8088:3000"
     volumes:
       - datos:/app/datos
 
