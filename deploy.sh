@@ -1,14 +1,17 @@
 #!/bin/bash
 
-echo "Desplegando "
+echo "🚀 Desplegando desde GitHub..."
 
-# Detener contenedor si ya existe
+# Traer últimos cambios
+git pull origin main
+
+# Bajar contenedores
 docker-compose down
 
-# Construir imagen
+# Construir
 docker-compose build
 
-# Levantar contenedor
+# Levantar
 docker-compose up -d
 
-echo "Aplicación disponible en: http://localhost:8088"
+echo "✅ App corriendo en puerto 8088"
