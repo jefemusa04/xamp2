@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  agenda:
+    build: .
+    ports:
+      - "80:3000"
+    volumes:
+      - datos_prod:/app/datos
+    restart: always
+    environment:
+      - NODE_ENV=production
+
+volumes:
+  datos_prod:
