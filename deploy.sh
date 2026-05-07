@@ -2,8 +2,8 @@
 
 # ─────────────────────────────────────────────────────
 #  Uso:
-#    ./deploy.sh        →  PRODUCCIÓN  (puerto 80)
-#    ./deploy.sh dev    →  DESARROLLO  (puerto 8088)
+#    ./deploy.sh        →  PRODUCCIÓN  (puerto 8080)
+#    ./deploy.sh dev    →  DESARROLLO  (localhost:8088)
 # ─────────────────────────────────────────────────────
 
 ENTORNO=${1:-prod}
@@ -24,4 +24,8 @@ docker-compose -f $COMPOSE_FILE down   || { echo "❌ Error en down";  exit 1; }
 docker-compose -f $COMPOSE_FILE build  || { echo "❌ Error en build"; exit 1; }
 docker-compose -f $COMPOSE_FILE up -d  || { echo "❌ Error en up";    exit 1; }
 
-echo "✅ App corriendo en http://$(hostname -I | awk '{print $1}'):$PUERTO"
+if [ "$ENTORNO" = "dev" ]; then
+  echo "✅ App DEV corriendo en http://localhost:$PUERTO"
+else
+  echo "✅ App PROD corriendo en http://$(hostname -I | awk '{print $1}'):$PUERTO"
+fi
